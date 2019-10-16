@@ -27,12 +27,9 @@ node {
 	bat "docker tag nodejsappimage-image:${commit_id} 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id}"
 	bat "docker push 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id}"
    }
-   stage('pull image from artifactory and run image'){
+   stage('pull image from artifactory and run test'){
    bat "docker pull 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id}"
-   bat "docker run -d nodejsappimage-image:${commit_id}"
-   bat 'docker ps'
+   bat "docker run -it nodejsappimage-image:${commit_id} npm run test"
    }
-	stage('Run test'){
 	
-	}
 }
