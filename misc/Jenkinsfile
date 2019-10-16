@@ -16,6 +16,11 @@ node {
        def app = docker.build("nodejsappimage-image:${commit_id}", '.')
      }
    }
+   stage('docker images list') {
+		bat 'docker --version'
+		bat 'docker images'
+     }
+   }
    stage('push image to jfrog artifactory'){
     bat 'docker login -u admin -p password 127.0.0.1:8081'
 	bat 'docker push 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id}'
