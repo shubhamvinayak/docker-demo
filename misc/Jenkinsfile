@@ -5,10 +5,10 @@ node {
      bat "git rev-parse --short HEAD > .git/commit-id"                        
      commit_id = readFile('.git/commit-id').trim()
    }
-   stage('test') {
+   stage('node-module install') {
      nodejs(nodeJSInstallationName: 'node') {
        bat 'npm install --only=dev'
-       bat 'npm test'
+       
      }
    }
    stage('docker build image') {
@@ -29,7 +29,10 @@ node {
    }
    stage('pull image from artifactory and run image'){
    bat "docker pull 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id}"
-   bat "docker run nodejsappimage-image:${commit_id}"
+   bat "docker run -d nodejsappimage-image:${commit_id}"
    bat 'docker ps'
    }
+	stage('Run test'){
+	
+	}
 }
