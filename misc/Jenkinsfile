@@ -11,9 +11,13 @@ node {
        bat 'npm test'
      }
    }
-   stage('docker build/push') {
+   stage('docker build image') {
      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
        def app = docker.build("nodejsappimage-image:${commit_id}", '.')
      }
+   }
+   stage('push image to jfrog artifactory'){
+    bat 'docker login -u admin -p password 127.0.0.1:8081'
+	bat 'docker push 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id}'
    }
 }
