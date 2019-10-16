@@ -13,7 +13,7 @@ node {
    }
    stage('docker build/push') {
      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-       def app = docker.build("shubham581326/docker-pipeline123:${commit_id}", '.').push()
+       def app = docker.build("nodejsappimage-image:${commit_id}", '.')
      }
    }
 }
