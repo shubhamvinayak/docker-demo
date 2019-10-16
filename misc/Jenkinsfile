@@ -29,7 +29,7 @@ node {
    }
    stage('pull image from artifactory and run test'){
    bat "docker pull 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id}"
-   bat "docker.exe run --rm -it 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id} npm run test"
+   bat "docker.exe run --rm 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id} npm run test"
    }
 	
 }
