@@ -13,7 +13,7 @@ node {
    }
    stage('docker build image') {
      docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-       def app = docker.build("nodejsappimage-image", '.')
+       def app = docker.build("nodejsappimage-image:${commit_id}", '.')
      }
    }
    stage('docker images list') {
