@@ -31,5 +31,8 @@ node {
    bat "docker pull 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id}"
    bat "docker.exe run --rm 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id} npm run test"
    }
+	stage('remove docker image'){
+	bat "docker rmi 127.0.0.1:8081/demodockerrepo/nodejsappimage-image:${commit_id} nodejsappimage-image:${commit_id}"
+	}
 	
 }
